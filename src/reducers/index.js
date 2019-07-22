@@ -1,3 +1,6 @@
 import { combineReducers } from "redux";
+import dogbreeds from "./dogbreeds";
 
-export default combineReducers({});
+export default combineReducers({
+  dogbreeds
+});
