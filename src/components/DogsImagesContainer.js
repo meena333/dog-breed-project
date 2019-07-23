@@ -5,17 +5,12 @@ import { getDogImages } from "../actions/displayImages";
 
 class DogsImagesContainer extends React.Component {
   componentDidMount() {
-    const breedName = "hound";
-    console.log("props", this.props);
-    console.log(`Now fetch photos for breed = ${breedName}`);
-
-    this.props.getDogImages();
-    console.log("compnentdidmount", this.props.dogImages);
+    this.props.getDogImages(this.props.match.params.breed);
   }
 
   render() {
     if (!this.props) return "Loading...";
-    return <DogsImages images={this.props} />;
+    return <DogsImages images={this.props} name={this.props.match.params.breed}/>;
   }
 }
 
