@@ -1,43 +1,34 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import * as request from 'superagent'
-// import {getRandomDogName} from '../../actions/displaylist'
-// import { connect } from "react-redux";
-// import {getImage} from '../../actions/displayImages'
+import { connect } from "react-redux"
 
-export default class Game1 extends React.Component {
+export function Game1(props) {
+  const { dogs, correctAnswer, dogImages } = props
+  console.log("dogs", dogs)
+  console.log("correct answer", correctAnswer)
+  console.log("dog images", dogImages)
 
-  // componentDidMount() {
-  //   const breedName = this.props
-  //   request(
-  //     `https://dog.ceo/api/breed/${encodeURIComponent(
-  //       breedName
-  //     )}/image/random/1`
-  //   ).then(response => response.body.message)
-  // }
-
-  render() {
-    return (
+  return (
+    <div>
+      <h1>Game 1</h1>
+      <Link to="/">Go back to the index</Link>
+      <br />
+      <br />
       <div>
-        <h1>Game 1</h1>
-        <Link to="/">Go back to the index</Link>
-        There are {this.props.dogs.length} dog breeds.
-        <ul>
-          {this.props.dogs.map(dog => {
-            return <li key={dog}>{dog}</li>;
-          })}
-          <li />
-        </ul>
-        <div>
-          {/* {image && <img src={image} alt="Dog"/>}
-        {!image && "Loading..."} */}
-        </div>
+        {dogImages && <img src={dogImages} alt="DogImage" />}
+        {!dogImages && "Loading..."}
       </div>
-    )
-  }
+      <ul>
+        {dogs.map(dog => {
+          return <li key={dog}>{dog}</li>
+        })}
+      </ul>
+    </div>
+  )
 }
 
-// export default connect(
-//   null,
-//   { getImage, getRandomDogName }
-// )(Game1);
+const mapStateToProps = state => {
+  return { ...state }
+}
+
+export default connect(mapStateToProps)(Game1)

@@ -10,7 +10,7 @@ export default function DogsImages(props) {
 
       <div>
         {arrayOfImages &&
-          arrayOfImages.map((url, i) => <img src={url} alt="Dog" key={i} />)}
+          arrayOfImages.map((url, i) => <img src={url} alt="DogImage" key={i} />)}
         {!arrayOfImages && "Loading..."}
       </div>
     </div>

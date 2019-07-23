@@ -10,7 +10,7 @@ class DogsImagesContainer extends React.Component {
 
   render() {
     if (!this.props) return "Loading...";
-    return <DogsImages images={this.props} name={this.props.match.params.breed}/>;
+    return <DogsImages images={this.props} name={this.props.match.params.breed} />;
   }
 }
 
