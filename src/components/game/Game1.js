@@ -1,39 +1,43 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import {getRandomDogName} from '../../actions/displaylist'
-import { connect } from "react-redux";
-import {getImage} from '../../actions/displayImages'
+import * as request from 'superagent'
+// import {getRandomDogName} from '../../actions/displaylist'
+// import { connect } from "react-redux";
+// import {getImage} from '../../actions/displayImages'
 
-function Game1(props) {
-  const image = props.img
-  console.log('image game 1', image)
-  // const dogs = props.dogs
-  // console.log('props.dogs',props.dogs)
-  // console.log(getRandomDogName(dogs))
-  // const correctAnswer = getRandomDogName(dogs)
-  // const image = ()=> getImage(correctAnswer)
-  // console.log('image',image)
+export default class Game1 extends React.Component {
 
-  return (
-    <div>
-      <h1>Game 1</h1>
-      <Link to="/">Go back to the index</Link>
+  // componentDidMount() {
+  //   const breedName = this.props
+  //   request(
+  //     `https://dog.ceo/api/breed/${encodeURIComponent(
+  //       breedName
+  //     )}/image/random/1`
+  //   ).then(response => response.body.message)
+  // }
 
+  render() {
+    return (
       <div>
-        {image && <img src={image} alt="Dog"/>}
-        {!image && "Loading..."}
-        {/* There are {dogs.length} dog breeds.
+        <h1>Game 1</h1>
+        <Link to="/">Go back to the index</Link>
+        There are {this.props.dogs.length} dog breeds.
         <ul>
-        {dogs.map(dog => {
-          return <li key={dog}>{dog}</li>;
-        })}
-        <li />
-      </ul> */}
+          {this.props.dogs.map(dog => {
+            return <li key={dog}>{dog}</li>;
+          })}
+          <li />
+        </ul>
+        <div>
+          {/* {image && <img src={image} alt="Dog"/>}
+        {!image && "Loading..."} */}
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
 }
-export default connect(
-  null,
-  { getImage, getRandomDogName }
-)(Game1);
+
+// export default connect(
+//   null,
+//   { getImage, getRandomDogName }
+// )(Game1);

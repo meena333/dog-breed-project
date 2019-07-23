@@ -8,6 +8,7 @@ export function showImage(breedImages) {
     payload: breedImages
   };
 }
+
 export function getDogImages(breedName) {
   return function(dispatch) {
     request(
@@ -21,7 +22,7 @@ export function getDogImages(breedName) {
   };
 }
 
-export function getImage(breedName) {
+export function getDogImage(breedName) {
   return function(dispatch) {
     request(
       `https://dog.ceo/api/breed/${encodeURIComponent(
@@ -29,7 +30,6 @@ export function getImage(breedName) {
       )}/image/random/1`
     ).then(response => {
       const result = response.body.message;
-      console.log('response getImage',response)
       dispatch(showImage(result));
     });
   };
