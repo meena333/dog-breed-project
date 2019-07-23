@@ -1,8 +1,8 @@
-import {GET_DOGS} from '../actions/displaylist'
+import {GET_DOG_IMAGE} from '../actions/displayImages'
 
 const reducer = (state = [], action = {}) => {
   switch (action.type) {
-    case GET_DOGS:
+    case GET_DOG_IMAGE:
       return action.payload;
     default:
       return state;
