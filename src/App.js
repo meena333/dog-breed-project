@@ -13,7 +13,7 @@ function App() {
         <Route exact path="/" component={DogsListContainer} />
         <Route
           exact
-          // path="/breeds/image/random/10"
+          path="/breeds/:breed"
           component={DogsImagesContainer}
         />
       </div>
