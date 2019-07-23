@@ -20,3 +20,17 @@ export function getDogImages(breedName) {
     });
   };
 }
+
+export function getImage(breedName) {
+  return function(dispatch) {
+    request(
+      `https://dog.ceo/api/breed/${encodeURIComponent(
+        breedName
+      )}/image/random/1`
+    ).then(response => {
+      const result = response.body.message;
+      console.log('response getImage',response)
+      dispatch(showImage(result));
+    });
+  };
+}
