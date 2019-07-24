@@ -1,11 +1,16 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
+import { showNumberOfAnswers, showNumberOfCorrectAnswers } from "../../actions/answers"
+import { renderQuestion } from "../../actions/displaylist"
 
 export class Game1 extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { selectedOption: "" }
+    this.state = { 
+      selectedOption: "",
+    }
+    // console.log("initialState", this.state)
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleOptionChange = this.handleOptionChange.bind(this)
@@ -13,20 +18,32 @@ export class Game1 extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { correctAnswer } = this.props
+    const { correctAnswer, numberOfAnswers, numberOfCorrectAnswers } = this.props
+    const { render } = this.props
 
     if (this.state.selectedOption === correctAnswer) {
       alert("You have the correct answer!")
-      window.location.reload()
+      this.props.showNumberOfAnswers(numberOfAnswers)
+      this.props.showNumberOfCorrectAnswers(numberOfCorrectAnswers)
+      this.props.renderQuestion(true)
+
+      // window.location.reload()
+      // this.setState({
+      //   ...this.state,
+      //   numberOfCorrectAnswers: numberOfCorrectAnswers + 1
+      // })
+      // console.log("number of correct answers", this.state.numberOfCorrectAnswers)
     }
     else if (this.state.selectedOption === "") {
       alert("Please choose an option")
     }
     else {
       alert(`Wrong answer! It's ${correctAnswer}`)
-      setTimeout(function(){
-        window.location.reload()
-      }, 2000)
+      this.props.showNumberOfAnswers(numberOfAnswers)
+      this.props.renderQuestion(true)
+      // setTimeout(function(){
+      //   window.location.reload()
+      // }, 2000)
     }
   }
 
@@ -34,6 +51,7 @@ export class Game1 extends React.Component {
     this.setState({
       selectedOption: event.target.value
     })
+    // console.log("STATE", this.state)
   }
 
   render() {
@@ -41,6 +59,8 @@ export class Game1 extends React.Component {
     console.log("dogs", dogs)
     console.log("correct answer", correctAnswer)
     console.log("dog images", dogImages)
+
+    console.log("GAME1 PROPS", this.props)
 
     return (
       <div className="Game1-content">
@@ -73,7 +93,7 @@ export class Game1 extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { ...state }
+  return { ...state, numberOfAnswers: state.answers, numberOfCorrectAnswers: state.correctAnswers }
 }
 
-export default connect(mapStateToProps)(Game1)
+export default connect(mapStateToProps, {showNumberOfAnswers, showNumberOfCorrectAnswers, renderQuestion})(Game1)

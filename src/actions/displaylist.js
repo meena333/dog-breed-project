@@ -2,11 +2,19 @@ import * as request from "superagent"
 
 export const GET_DOGS = "GET_DOGS"
 export const CREATE_QUESTION = "CREATE_QUESTION"
+export const RENDER = "RENDER"
 
 export function createQuestion(dogs, correctAnswer) {
   return {
     type: CREATE_QUESTION,
     payload: { dogs, correctAnswer }
+  }
+}
+
+export function renderQuestion(renderQuestion) {
+  return {
+    type: RENDER,
+    payload: { renderQuestion }
   }
 }
 
