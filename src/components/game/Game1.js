@@ -5,6 +5,7 @@ import {
   showNumberOfAnswers,
   showNumberOfCorrectAnswers
 } from "../../actions/answers";
+import Scoreboard from "../Scoreboard";
 
 export class Game1 extends React.Component {
   constructor(props) {
@@ -56,6 +57,12 @@ export class Game1 extends React.Component {
       <div className="Game1-content">
         <h1>Guess who's here?</h1>
         <Link to="/">Go back to the index</Link>
+        <br />
+        <br />
+        <Scoreboard
+          total={this.props.numberOfAnswers}
+          correct={this.props.numberOfCorrectAnswers}
+        />
         <br />
         <br />
         <div className="Dog-images">
