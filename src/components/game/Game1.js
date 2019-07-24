@@ -12,13 +12,21 @@ export class Game1 extends React.Component {
   }
 
   handleSubmit(event) {
-    // event.preventDefault()
+    event.preventDefault()
     const { correctAnswer } = this.props
+
     if (this.state.selectedOption === correctAnswer) {
       alert("You have the correct answer!")
+      window.location.reload()
+    }
+    else if (this.state.selectedOption === "") {
+      alert("Please choose an option")
     }
     else {
       alert(`Wrong answer! It's ${correctAnswer}`)
+      setTimeout(function(){
+        window.location.reload()
+      }, 2000)
     }
   }
 
