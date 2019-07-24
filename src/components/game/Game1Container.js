@@ -10,7 +10,6 @@ class Game1Container extends React.Component {
   }
 
   render() {
-    // console.log("GAME1 CONTAINER", this.props)
     const { dogs, correctAnswer } = this.props.questions
     if (!correctAnswer) return "Loading..."
     this.props.getDogImage(correctAnswer)
