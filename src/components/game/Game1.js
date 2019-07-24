@@ -12,8 +12,8 @@ export class Game1 extends React.Component {
     }
     // console.log("initialState", this.state)
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleOptionChange = this.handleOptionChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -52,13 +52,14 @@ export class Game1 extends React.Component {
       selectedOption: event.target.value
     })
     // console.log("STATE", this.state)
+
   }
 
   render() {
-    const { dogs, correctAnswer, dogImages } = this.props
-    console.log("dogs", dogs)
-    console.log("correct answer", correctAnswer)
-    console.log("dog images", dogImages)
+    const { dogs, correctAnswer, dogImages } = this.props;
+    console.log("dogs", dogs);
+    console.log("correct answer", correctAnswer);
+    console.log("dog images", dogImages);
 
     console.log("GAME1 PROPS", this.props)
 
@@ -78,17 +79,23 @@ export class Game1 extends React.Component {
             {dogs.map(dog => {
               return (
                 <div key={dog}>
-                  <input type="radio" id={dog} name="dogbreed" value={dog} onChange={this.handleOptionChange}></input>
+                  <input
+                    type="radio"
+                    id={dog}
+                    name="dogbreed"
+                    value={dog}
+                    onChange={this.handleOptionChange}
+                  />
                   <label htmlFor={dog}>{dog}</label>
                 </div>
-              )
+              );
             })}
             <br />
             <button onClick={() => this.handleSubmit}>Submit Answer</button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
