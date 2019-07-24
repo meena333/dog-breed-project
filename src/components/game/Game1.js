@@ -1,46 +1,44 @@
-import * as React from "react"
-import { Link } from "react-router-dom"
-import { connect } from "react-redux"
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 export class Game1 extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { selectedOption: "" }
+    super(props);
+    this.state = { selectedOption: "" };
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleOptionChange = this.handleOptionChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    const { correctAnswer } = this.props
+    event.preventDefault();
+    const { correctAnswer } = this.props;
 
     if (this.state.selectedOption === correctAnswer) {
-      alert("You have the correct answer!")
-      window.location.reload()
-    }
-    else if (this.state.selectedOption === "") {
-      alert("Please choose an option")
-    }
-    else {
-      alert(`Wrong answer! It's ${correctAnswer}`)
-      setTimeout(function(){
-        window.location.reload()
-      }, 2000)
+      alert("You have the correct answer!");
+      window.location.reload(true);
+    } else if (this.state.selectedOption === "") {
+      alert("Please choose an option");
+    } else {
+      alert(`Wrong answer! It's ${correctAnswer}`);
+      setTimeout(function() {
+        window.location.reload(true);
+      }, 2000);
     }
   }
 
   handleOptionChange(event) {
     this.setState({
       selectedOption: event.target.value
-    })
+    });
   }
 
   render() {
-    const { dogs, correctAnswer, dogImages } = this.props
-    console.log("dogs", dogs)
-    console.log("correct answer", correctAnswer)
-    console.log("dog images", dogImages)
+    const { dogs, correctAnswer, dogImages } = this.props;
+    console.log("dogs", dogs);
+    console.log("correct answer", correctAnswer);
+    console.log("dog images", dogImages);
 
     return (
       <div className="Game1-content">
@@ -58,22 +56,28 @@ export class Game1 extends React.Component {
             {dogs.map(dog => {
               return (
                 <div key={dog}>
-                  <input type="radio" id={dog} name="dogbreed" value={dog} onChange={this.handleOptionChange}></input>
+                  <input
+                    type="radio"
+                    id={dog}
+                    name="dogbreed"
+                    value={dog}
+                    onChange={this.handleOptionChange}
+                  />
                   <label htmlFor={dog}>{dog}</label>
                 </div>
-              )
+              );
             })}
             <br />
             <button onClick={() => this.handleSubmit}>Submit Answer</button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => {
-  return { ...state }
-}
+  return { ...state };
+};
 
-export default connect(mapStateToProps)(Game1)
+export default connect(mapStateToProps)(Game1);
