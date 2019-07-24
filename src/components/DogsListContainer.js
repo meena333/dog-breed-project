@@ -1,6 +1,6 @@
 import * as React from "react";
 import DogsList from "./DogsList";
-import { getDogs, showList } from "../actions/displaylist";
+import { getDogs } from "../actions/displaylist";
 import { connect } from "react-redux";
 
 class DogsListContainer extends React.Component {
@@ -22,5 +22,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getDogs, showList }
+  { getDogs }
 )(DogsListContainer);
