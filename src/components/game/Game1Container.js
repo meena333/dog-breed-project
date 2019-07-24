@@ -23,6 +23,7 @@ class Game1Container extends React.Component {
         correctAnswer={correctAnswer}
         getRandomDogs={this.props.getRandomDogs}
       />
+      // <Scoreboard />
     );
   }
 }
