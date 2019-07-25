@@ -11,8 +11,7 @@ class Game1Container extends React.Component {
 
   render() {
     const { dogs, correctAnswer } = this.props.questions;
-
-    console.log("GAME1 CONTAINER", this.props);
+    
     if (!correctAnswer) return "Loading...";
     this.props.getDogImage(correctAnswer);
 
@@ -23,7 +22,6 @@ class Game1Container extends React.Component {
         correctAnswer={correctAnswer}
         getRandomDogs={this.props.getRandomDogs}
       />
-      // <Scoreboard />
     );
   }
 }
