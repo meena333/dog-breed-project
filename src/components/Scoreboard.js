@@ -3,11 +3,12 @@ import * as React from "react";
 export default class Scoreboard extends React.Component {
   render() {
     let percent = (this.props.correct / this.props.total) * 100;
-    console.log("percent", percent);
     if (!percent) {
       percent = 0;
     }
-    percent = percent.toFixed(2);
+    else {
+      percent = percent.toFixed(2);
+    }
 
     return (
       <div className="Scoreboard">

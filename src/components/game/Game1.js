@@ -7,7 +7,7 @@ import {
 } from "../../actions/answers";
 import Scoreboard from "../Scoreboard";
 
-export class Game1 extends React.Component {
+class Game1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,7 @@ export class Game1 extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const {
       correctAnswer,
       numberOfAnswers,
@@ -31,14 +32,15 @@ export class Game1 extends React.Component {
       alert("You have the correct answer!");
       this.props.showNumberOfAnswers(numberOfAnswers);
       this.props.showNumberOfCorrectAnswers(numberOfCorrectAnswers);
-
       getRandomDogs();
-    } else if (this.state.selectedOption === "") {
+    } 
+    else if (this.state.selectedOption === "") {
       alert("Please choose an option");
-    } else {
+    } 
+    else {
       alert(`Wrong answer! It's ${correctAnswer}`);
       this.props.showNumberOfAnswers(numberOfAnswers);
-      getRandomDogs();
+      setTimeout(() => getRandomDogs(), 2000);
     }
   }
 
@@ -49,10 +51,7 @@ export class Game1 extends React.Component {
   }
 
   render() {
-    const { dogs, correctAnswer, dogImages } = this.props;
-
-    console.log("GAME1 PROPS", this.props);
-
+    const { dogs, dogImages } = this.props;
     return (
       <div className="Game1-content">
         <h1>Guess who's here?</h1>
@@ -72,7 +71,7 @@ export class Game1 extends React.Component {
         <br />
         <form onSubmit={this.handleSubmit}>
           <div className="Answers">
-            {dogs.map(dog => {
+            {dogs && dogs.map(dog => {
               return (
                 <div key={dog}>
                   <input
