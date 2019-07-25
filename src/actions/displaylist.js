@@ -41,7 +41,8 @@ function makeArrayOfRandomDogs(numberOfDogs, dogsArray) {
 
 export function getDogs() {
   return function(dispatch) {
-    request("https://dog.ceo/api/breeds/list/all").then(response => {
+    request("https://dog.ceo/api/breeds/list/all")
+    .then(response => {
       const dogbreeds = Object.keys(response.body.message);
       dispatch(showList(dogbreeds));
     });
@@ -50,7 +51,8 @@ export function getDogs() {
 
 export function getRandomDogs() {
   return function(dispatch) {
-    request("https://dog.ceo/api/breeds/list/all").then(response => {
+    request("https://dog.ceo/api/breeds/list/all")
+    .then(response => {
       const dogbreeds = Object.keys(response.body.message);
       const randomDogs = makeArrayOfRandomDogs(3, dogbreeds);
       const randombreed = getRandomDogName(randomDogs);

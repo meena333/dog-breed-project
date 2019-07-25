@@ -41,7 +41,7 @@ class Game2 extends React.Component {
                 alert(`Wrong answer! It's image ${correctAnswerPosition}`);
             }
             this.props.showNumberOfAnswers(numberOfAnswers);
-            getRandomBreedsImages();
+            setTimeout(() => getRandomBreedsImages(), 2000);
         }
     }
 
@@ -73,8 +73,8 @@ class Game2 extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="Dog-images">
                         {!images && "Loading..."}
-                        {images && images.map((image, i) =>
-                            <div className="Images-game2" key={i}>
+                        {images && images.map(image =>
+                            <div className="Images-game2" key={image}>
                                 <input type="radio" id={image} name="dogbreed" value={image} onChange={this.handleOptionChange}></input>
                                 <img src={image} alt="Dog" />
                             </div>

@@ -30,9 +30,9 @@ export function getDogImages(breedName) {
     request(
       `https://dog.ceo/api/breed/${encodeURIComponent(breedName)}/images/random/10`)
       .then(response => {
-      const result = response.body.message;
-      dispatch(showImage(result));
-    });
+        const result = response.body.message;
+        dispatch(showImage(result));
+      });
   };
 }
 
@@ -41,11 +41,11 @@ export function getRandomBreedsImages() {
     request(
       `https://dog.ceo/api/breeds/image/random/3`)
       .then(response => {
-      const url = response.body.message;
-      const correctAnswer = getRandomDogImage(url);
-      const dogName = getNameFromImage(correctAnswer)
-      dispatch(createQuestionGame2(url, dogName, correctAnswer))
-    });
+        const url = response.body.message;
+        const correctAnswer = getRandomDogImage(url);
+        const dogName = getNameFromImage(correctAnswer)
+        dispatch(createQuestionGame2(url, dogName, correctAnswer))
+      });
   };
 }
 
@@ -54,8 +54,8 @@ export function getDogImage(breedName) {
     request(
       `https://dog.ceo/api/breed/${encodeURIComponent(breedName)}/images/random/1`)
       .then(response => {
-      const url= response.body.message;
-      dispatch(showImage(url));
-    });
+        const url = response.body.message;
+        dispatch(showImage(url));
+      });
   };
 }
