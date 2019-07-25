@@ -28,7 +28,7 @@ class Game2 extends React.Component {
             getRandomBreedsImages
         } = this.props;
 
-        if (this.state.selectedOption === correctAnswer) {
+        if (this.state.selectedOption === this.props.correctAnswer) {
             alert("You have the correct answer!");
             this.props.showNumberOfAnswers(numberOfAnswers);
             this.props.showNumberOfCorrectAnswers(numberOfCorrectAnswers);
@@ -53,9 +53,6 @@ class Game2 extends React.Component {
 
     render() {
         const { dogName, images } = this.props;
-        console.log("GAME2 PROPS", this.props);
-        console.log('correct answer', this.props.correctAnswer)
-        console.log('dogName', dogName)
 
         return (
             <div className="Game2-content">
