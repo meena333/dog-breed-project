@@ -1,12 +1,15 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { getRandomDogs } from "../../actions/displaylist";
-import { checkNumberOfAnswers, checkNumberOfCorrectAnswers } from "../../actions/checkNumberOfAnswers";
+import {
+  checkNumberOfAnswers,
+  checkNumberOfCorrectAnswers
+} from "../../actions/checkNumberOfAnswers";
 import Game1 from "./Game1";
 
 class Game1Container extends React.Component {
-  state = { selectedOption: "" }
-  
+  state = { selectedOption: "" };
+
   componentDidMount() {
     this.props.getRandomDogs();
   }
@@ -22,44 +25,43 @@ class Game1Container extends React.Component {
       this.props.checkNumberOfAnswers(numberOfAnswers);
       this.props.checkNumberOfCorrectAnswers(numberOfCorrectAnswers);
 
+      console.log("gamechoice", this.props.gameChoice);
       if (this.props.gameChoice === 1) {
         this.props.getRandomDogs();
       }
 
       if (this.props.renderGame3Bool !== undefined) {
-        const bool = this.props.renderGame3Bool()
+        const bool = this.props.renderGame3Bool();
         if (bool) {
-            this.props.getRandomDogs();
+          this.props.getRandomDogs();
         }
       }
-    } 
-
-    else if (this.state.selectedOption === "") {
+    } else if (this.state.selectedOption === "") {
       alert("Please choose an option");
-    } 
-
-    else {
+    } else {
       alert(`Wrong answer! It's ${correctAnswer}`);
       this.props.checkNumberOfAnswers(numberOfAnswers);
+
+      console.log("gamechoice", this.props.gameChoice);
 
       if (this.props.gameChoice === 1) {
         setTimeout(() => this.props.getRandomDogs(), 2000);
       }
 
       if (this.props.renderGame3Bool !== undefined) {
-        const bool = this.props.renderGame3Bool()
+        const bool = this.props.renderGame3Bool();
         if (bool) {
           setTimeout(() => this.props.getRandomDogs(), 2000);
         }
       }
     }
-  }
+  };
 
   handleOptionChange = event => {
     this.setState({
       selectedOption: event.target.value
     });
-  }
+  };
 
   render() {
     const { dogbreeds, correctAnswer, dogImages } = this.props.questions;
@@ -85,12 +87,13 @@ class Game1Container extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  console.log(state);
   return {
-      questions: state.questions,
-      numberOfAnswers: state.numberOfAnswers,
-      numberOfCorrectAnswers: state.numberOfCorrectAnswers,
-      dogImages: state.dogImages
+    questions: state.questions,
+    numberOfAnswers: state.numberOfAnswers,
+    numberOfCorrectAnswers: state.numberOfCorrectAnswers,
+    dogImages: state.dogImages,
+    gameChoice: state.gameChoice
   };
 };
 
