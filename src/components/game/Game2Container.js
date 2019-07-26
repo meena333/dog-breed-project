@@ -14,10 +14,11 @@ class Game2Container extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const { images, correctAnswerGame2 } = this.props.questions;
+        const { images, correctAnswer} = this.props.questions;
         const { numberOfAnswers, numberOfCorrectAnswers } = this.props;
+        console.log("GAME2 CONTAINER", this.props)
 
-        if (this.state.selectedOption === correctAnswerGame2) {
+        if (this.state.selectedOption === correctAnswer) {
             alert("You have the correct answer!");
             this.props.checkNumberOfAnswers(numberOfAnswers);
             this.props.checkNumberOfCorrectAnswers(numberOfCorrectAnswers);
@@ -37,7 +38,7 @@ class Game2Container extends React.Component {
             alert("Please choose an option");
 
         } else {
-            const correctAnswerPosition = images.indexOf(correctAnswerGame2) + 1
+            const correctAnswerPosition = images.indexOf(correctAnswer) + 1
 
             if (images) {
                 alert(`Wrong answer! It's image ${correctAnswerPosition}`);

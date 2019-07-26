@@ -21,7 +21,17 @@ class Game1Container extends React.Component {
       alert("You have the correct answer!");
       this.props.checkNumberOfAnswers(numberOfAnswers);
       this.props.checkNumberOfCorrectAnswers(numberOfCorrectAnswers);
-      this.props.getRandomDogs();
+
+      if (this.props.gameChoice === 1) {
+        this.props.getRandomDogs();
+      }
+
+      if (this.props.renderGame3Bool !== undefined) {
+        const bool = this.props.renderGame3Bool()
+        if (bool) {
+            this.props.getRandomDogs();
+        }
+      }
     } 
 
     else if (this.state.selectedOption === "") {
@@ -31,7 +41,17 @@ class Game1Container extends React.Component {
     else {
       alert(`Wrong answer! It's ${correctAnswer}`);
       this.props.checkNumberOfAnswers(numberOfAnswers);
-      setTimeout(() => this.props.getRandomDogs(), 2000);
+
+      if (this.props.gameChoice === 1) {
+        setTimeout(() => this.props.getRandomDogs(), 2000);
+      }
+
+      if (this.props.renderGame3Bool !== undefined) {
+        const bool = this.props.renderGame3Bool()
+        if (bool) {
+          setTimeout(() => this.props.getRandomDogs(), 2000);
+        }
+      }
     }
   }
 
@@ -44,8 +64,6 @@ class Game1Container extends React.Component {
   render() {
     const { dogbreeds, correctAnswer, dogImages } = this.props.questions;
     const { numberOfAnswers, numberOfCorrectAnswers } = this.props;
-    console.log('game 1 props', this.props)
-    console.log('correct answer',correctAnswer)
 
     if (!this.props) return "Loading...";
 

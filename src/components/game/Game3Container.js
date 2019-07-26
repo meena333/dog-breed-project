@@ -18,7 +18,6 @@ class Game3Container extends React.Component {
     }
 
     render() {
-        console.log("GAME3 PROPS", this.props)
         if (this.state.game) {
             return <Game1Container renderGame3Bool={this.renderGame3Bool} />
         }

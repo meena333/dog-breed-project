@@ -7,7 +7,6 @@ export default function Game1(props) {
       dogbreeds, dogImages,
       handleSubmit, handleOptionChange,
       numberOfAnswers, numberOfCorrectAnswers } = props;
-    // console.log("GAME1 PROPS", this.props)
 
     return (
       <div className="Game1-content">
