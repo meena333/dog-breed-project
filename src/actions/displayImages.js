@@ -4,10 +4,10 @@ import {makeArrayOfRandomDogs} from './displaylist'
 export const GET_DOG_IMAGE = "GET_DOG_IMAGE";
 export const CREATE_QUESTION_GAME_2 = "CREATE_QUESTION_GAME_2"
 
-function createQuestionGame2(images, dogName, correctAnswerGame2) {
+function createQuestionGame2(images, dogName, correctAnswer) {
   return {
     type: CREATE_QUESTION_GAME_2,
-    payload: { images, dogName, correctAnswerGame2 }
+    payload: { images, dogName, correctAnswer }
   };
 }
 
@@ -37,18 +37,11 @@ export function getDogImages(breedName) {
   };
 }
 
-async function getImage(breedName) {
+export async function getImage(breedName) {
   const response = await request(`https://dog.ceo/api/breed/${encodeURIComponent(breedName)}/images/random/1`)
   const url = response.body.message;
   return url[0]
 }
-
-export function getDogImage(breedName) {
-  return async function (dispatch) {
-    const url = await getImage(breedName);
-    dispatch(showImage(url));
-  };
-};
 
 export function getRandomBreedsImages() {
   return async function (dispatch) {
