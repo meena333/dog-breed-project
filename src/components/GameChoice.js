@@ -9,6 +9,9 @@ export default function GameChoice() {
     <br />
     <br />
     <button className="Game-button"><Link to= {`/game/game2`}>What do I look like?</Link></button>
+    <br />
+    <br />
+    <button className="Game-button"><Link to= {`/game/game3`}>Which dog breed are you?</Link></button>
     </div>
   )
 }

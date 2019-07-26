@@ -9,6 +9,7 @@ import FrontPage from "./components/FrontPage";
 import GameChoice from "./components/GameChoice"
 import Game1Container from "./components/game/Game1Container";
 import Game2Container from "./components/game/Game2Container";
+import Game3Container from "./components/game/Game3Container";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/game" component={ GameChoice } />
         <Route exact path="/game/game1" component={ Game1Container } />
         <Route exact path="/game/game2" component={ Game2Container } />
+        <Route exact path="/game/game3" component={ Game3Container } />
       </div>
     </Provider>
   );

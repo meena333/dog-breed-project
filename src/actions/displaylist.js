@@ -4,10 +4,10 @@ export const GET_DOGS = "GET_DOGS";
 export const CREATE_QUESTION_GAME_1 = "CREATE_QUESTION_GAME_1";
 export const RENDER = "RENDER";
 
-function createQuestionGame1(dogs, correctAnswer) {
+function createQuestionGame1(dogbreeds, correctAnswer) {
   return {
     type: CREATE_QUESTION_GAME_1,
-    payload: { dogs, correctAnswer }
+    payload: { dogbreeds, correctAnswer }
   };
 }
 
