@@ -1,36 +1,100 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { getRandomDogs } from "../../actions/displaylist";
+import { checkNumberOfAnswers, checkNumberOfCorrectAnswers } from "../../actions/checkNumberOfAnswers";
 import Game1 from "./Game1";
-import { getDogImage } from "../../actions/displayImages";
 
 class Game1Container extends React.Component {
+  state = { selectedOption: "" }
+  
   componentDidMount() {
     this.props.getRandomDogs();
   }
 
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const { correctAnswer } = this.props.questions;
+    const { numberOfAnswers, numberOfCorrectAnswers } = this.props;
+
+    if (this.state.selectedOption === correctAnswer) {
+      alert("You have the correct answer!");
+      this.props.checkNumberOfAnswers(numberOfAnswers);
+      this.props.checkNumberOfCorrectAnswers(numberOfCorrectAnswers);
+
+      if (this.props.gameChoice === 1) {
+        this.props.getRandomDogs();
+      }
+
+      if (this.props.renderGame3Bool !== undefined) {
+        const bool = this.props.renderGame3Bool()
+        if (bool) {
+            this.props.getRandomDogs();
+        }
+      }
+    } 
+
+    else if (this.state.selectedOption === "") {
+      alert("Please choose an option");
+    } 
+
+    else {
+      alert(`Wrong answer! It's ${correctAnswer}`);
+      this.props.checkNumberOfAnswers(numberOfAnswers);
+
+      if (this.props.gameChoice === 1) {
+        setTimeout(() => this.props.getRandomDogs(), 2000);
+      }
+
+      if (this.props.renderGame3Bool !== undefined) {
+        const bool = this.props.renderGame3Bool()
+        if (bool) {
+          setTimeout(() => this.props.getRandomDogs(), 2000);
+        }
+      }
+    }
+  }
+
+  handleOptionChange = event => {
+    this.setState({
+      selectedOption: event.target.value
+    });
+  }
+
   render() {
-    const { dogs, correctAnswer } = this.props.questions;
-    
-    if (!correctAnswer) return "Loading...";
-    this.props.getDogImage(correctAnswer);
+    const { dogbreeds, correctAnswer, dogImages } = this.props.questions;
+    const { numberOfAnswers, numberOfCorrectAnswers } = this.props;
 
     if (!this.props) return "Loading...";
-    return (
-      <Game1
-        dogs={dogs}
-        correctAnswer={correctAnswer}
-        getRandomDogs={this.props.getRandomDogs}
-      />
-    );
+
+    if (!correctAnswer) return "Loading...";
+    if (correctAnswer) {
+      return (
+        <Game1
+          dogbreeds={dogbreeds}
+          correctAnswer={correctAnswer}
+          numberOfAnswers={numberOfAnswers}
+          numberOfCorrectAnswers={numberOfCorrectAnswers}
+          dogImages={dogImages}
+          handleSubmit={this.handleSubmit}
+          handleOptionChange={this.handleOptionChange}
+        />
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
-  return { questions: state.questions };
+  console.log(state)
+  return {
+      questions: state.questions,
+      numberOfAnswers: state.numberOfAnswers,
+      numberOfCorrectAnswers: state.numberOfCorrectAnswers,
+      dogImages: state.dogImages
+  };
 };
 
 export default connect(
   mapStateToProps,
-  { getRandomDogs, getDogImage }
+  { getRandomDogs, checkNumberOfAnswers, checkNumberOfCorrectAnswers }
 )(Game1Container);
