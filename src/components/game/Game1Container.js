@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { getRandomDogs } from "../../actions/displaylist";
 import { getDogImage } from "../../actions/displayImages";
-import { checkNumberOfAnswers, checkNumberOfCorrectAnswers } from "../../actions/answers";
+import { checkNumberOfAnswers, checkNumberOfCorrectAnswers } from "../../actions/checkNumberOfAnswers";
 import Game1 from "./Game1";
 
 class Game1Container extends React.Component {
@@ -15,7 +15,7 @@ class Game1Container extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { correctAnswer } = this.props;
+    const { correctAnswer } = this.props.questions;
     const { numberOfAnswers, numberOfCorrectAnswers } = this.props;
 
     if (this.state.selectedOption === correctAnswer) {

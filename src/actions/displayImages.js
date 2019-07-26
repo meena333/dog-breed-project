@@ -1,4 +1,5 @@
 import * as request from "superagent";
+import {makeArrayOfRandomDogs} from './displaylist'
 
 export const GET_DOG_IMAGE = "GET_DOG_IMAGE";
 export const CREATE_QUESTION_GAME_2 = "CREATE_QUESTION_GAME_2"
@@ -36,26 +37,27 @@ export function getDogImages(breedName) {
   };
 }
 
-export function getRandomBreedsImages() {
-  return function (dispatch) {
-    request(
-      `https://dog.ceo/api/breeds/image/random/3`)
-      .then(response => {
-        const url = response.body.message;
-        const correctAnswer = getRandomDogImage(url);
-        const dogName = getNameFromImage(correctAnswer)
-        dispatch(createQuestionGame2(url, dogName, correctAnswer))
-      });
-  };
+async function getImage(breedName) {
+  const response = await request(`https://dog.ceo/api/breed/${encodeURIComponent(breedName)}/images/random/1`)
+  const url = response.body.message;
+  return url[0]
 }
 
 export function getDogImage(breedName) {
-  return function (dispatch) {
-    request(
-      `https://dog.ceo/api/breed/${encodeURIComponent(breedName)}/images/random/1`)
-      .then(response => {
-        const url = response.body.message;
-        dispatch(showImage(url));
-      });
+  return async function (dispatch) {
+    const url = await getImage(breedName);
+    dispatch(showImage(url));
   };
+};
+
+export function getRandomBreedsImages() {
+  return async function (dispatch) {
+    const response = await request("https://dog.ceo/api/breeds/list/all")
+    const dogbreeds = Object.keys(response.body.message);
+    const randomDogs = makeArrayOfRandomDogs(3, dogbreeds);
+    const arrayImages = await Promise.all(randomDogs.map(dog => getImage(dog)))
+    const correctAnswer = getRandomDogImage(arrayImages)
+    const dogName = getNameFromImage(correctAnswer)
+    dispatch(createQuestionGame2(arrayImages, dogName, correctAnswer));
+  }
 }

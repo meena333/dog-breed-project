@@ -26,7 +26,7 @@ function arrayCheck(array, randomDog) {
   return array.find(dog => dog === randomDog);
 }
 
-function makeArrayOfRandomDogs(numberOfDogs, dogsArray) {
+export function makeArrayOfRandomDogs(numberOfDogs, dogsArray) {
   const array = [];
 
   for (let i = 0; i < numberOfDogs; i++) {

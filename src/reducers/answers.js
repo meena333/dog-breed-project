@@ -1,4 +1,4 @@
-import { CHECK_NUMBER_OF_ANSWERS } from '../actions/answers';
+import { CHECK_NUMBER_OF_ANSWERS } from '../actions/checkNumberOfAnswers';
 
 const reducer = (state = 0, action = {}) => {
     switch (action.type) {
