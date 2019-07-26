@@ -4,10 +4,17 @@ import Game2Container from "./Game2Container";
 import { connect } from "react-redux";
 
 class Game3Container extends React.Component {
-    state = { game: false };
+    state = { game: null };
+
+    componentDidMount() {
+        this.renderGame3Bool()
+    }
 
     renderGame3Bool = () => {
-        this.setState({ game: Math.random() >= 0.5 })
+        const bool = Math.random() >= 0.5
+        this.setState({ game: bool })
+
+        return bool
     }
 
     render() {
@@ -15,14 +22,13 @@ class Game3Container extends React.Component {
         if (this.state.game) {
             return <Game1Container renderGame3Bool={this.renderGame3Bool} />
         }
-        else {
+        else if (this.state.game === false) {
             return <Game2Container renderGame3Bool={this.renderGame3Bool} />
+        }
+        else {
+            return "Loading..."
         }
     }
 }
 
-const mapStateToProps = state => {
-    return state
-}
-
-export default connect(mapStateToProps)(Game3Container);
+export default connect()(Game3Container);

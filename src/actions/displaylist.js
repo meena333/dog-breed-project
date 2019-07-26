@@ -2,12 +2,11 @@ import * as request from "superagent";
 
 export const GET_DOGS = "GET_DOGS";
 export const CREATE_QUESTION_GAME_1 = "CREATE_QUESTION_GAME_1";
-export const RENDER = "RENDER";
 
-function createQuestionGame1(dogbreeds, correctAnswer) {
+function createQuestionGame1(dogbreeds, correctAnswerGame1) {
   return {
     type: CREATE_QUESTION_GAME_1,
-    payload: { dogbreeds, correctAnswer }
+    payload: { dogbreeds, correctAnswerGame1 }
   };
 }
 
