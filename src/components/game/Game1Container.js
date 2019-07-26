@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { getRandomDogs } from "../../actions/displaylist";
-import { getDogImage } from "../../actions/displayImages";
+//import { getDogImage } from "../../actions/displayImages";
 import { checkNumberOfAnswers, checkNumberOfCorrectAnswers } from "../../actions/checkNumberOfAnswers";
 import Game1 from "./Game1";
 
@@ -43,40 +43,41 @@ class Game1Container extends React.Component {
   }
 
   render() {
-    const { dogbreeds, correctAnswer } = this.props.questions;
+    const { dogbreeds, correctAnswer, dogImages } = this.props.questions;
     const { numberOfAnswers, numberOfCorrectAnswers } = this.props;
+    console.log('game 1 props', this.props)
+    console.log('correct answer',correctAnswer)
 
     if (!this.props) return "Loading...";
 
     if (!correctAnswer) return "Loading...";
-    if (correctAnswer) return this.props.getDogImage(correctAnswer);
-
-    // if (this.props.renderGame3Bool !== undefined) {
-    //   this.props.renderGame3Bool()
-    // }
-
-    return (
-      <Game1
-        dogbreeds={dogbreeds}
-        correctAnswer={correctAnswer}
-        numberOfAnswers={numberOfAnswers}
-        numberOfCorrectAnswers={numberOfCorrectAnswers}
-        handleSubmit={this.handleSubmit}
-        handleOptionChange={this.handleOptionChange}
-      />
-    );
+    if (correctAnswer) {
+      return (
+        <Game1
+          dogbreeds={dogbreeds}
+          correctAnswer={correctAnswer}
+          numberOfAnswers={numberOfAnswers}
+          numberOfCorrectAnswers={numberOfCorrectAnswers}
+          dogImages={dogImages}
+          handleSubmit={this.handleSubmit}
+          handleOptionChange={this.handleOptionChange}
+        />
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
       questions: state.questions,
       numberOfAnswers: state.numberOfAnswers,
-      numberOfCorrectAnswers: state.numberOfCorrectAnswers
+      numberOfCorrectAnswers: state.numberOfCorrectAnswers,
+      dogImages: state.dogImages
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getRandomDogs, getDogImage, checkNumberOfAnswers, checkNumberOfCorrectAnswers }
+  { getRandomDogs, checkNumberOfAnswers, checkNumberOfCorrectAnswers }
 )(Game1Container);

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Scoreboard from "../Scoreboard";
 
 export default function Game1(props) {
-    const { 
+  const { 
       dogbreeds, dogImages,
       handleSubmit, handleOptionChange,
       numberOfAnswers, numberOfCorrectAnswers } = props;

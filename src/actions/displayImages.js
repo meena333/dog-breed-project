@@ -37,19 +37,24 @@ export function getDogImages(breedName) {
   };
 }
 
-async function getImage(breedName) {
+export async function getImage(breedName) {
   const response = await request(`https://dog.ceo/api/breed/${encodeURIComponent(breedName)}/images/random/1`)
   const url = response.body.message;
   return url[0]
 }
-
+//this  function can be removed
 export function getDogImage(breedName) {
+  console.log('getDogImage', breedName)
   return async function (dispatch) {
-    const url = await getImage(breedName);
-    dispatch(showImage(url));
-  };
+    try{
+    const url = await (getImage(breedName))
+    console.log('url', url)
+    dispatch(showImage(url))
+  } catch(error){
+    console.error(error)
+  }
 };
-
+}
 export function getRandomBreedsImages() {
   return async function (dispatch) {
     const response = await request("https://dog.ceo/api/breeds/list/all")
